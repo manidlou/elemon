@@ -39,11 +39,9 @@ var elec_proc = spawn(ELEC_BIN, ['.'], {detached: true});
 
 elec_proc.on('error', function(err) {
   console.log('|\n-> elemon error: failed to start electron main process -> ', err);
-  if (elec_proc.pid !== null) {
-    elec_proc.stdin.end();
-    process.kill(-elec_proc.pid);
-    process.exit(0);
-  }
+  elec_proc.stdin.end();
+  process.kill(-elec_proc.pid);
+  process.exit(0);
 });
 
 process.on('SIGINT', function() {
@@ -63,7 +61,6 @@ elec_proc.stderr.on('data', function(data) {
   elec_proc.stdin.end();
   process.kill(-elec_proc.pid);
   process.exit(0);
-
 });
 
 watch(process.cwd(), function() {
