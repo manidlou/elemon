@@ -13,7 +13,7 @@ In order to use `elemon` locally, when you normally run your local `electron` bi
 
 `elemon` runs your [electron](https://github.com/electron/electron) application and watches the project directory. Upon any changes, it kills the group of all processes that are associated with spawned `electron` process and automatically reloads the application. So, you can immediately see the result of the changes that you just made.
 
-If `elemon` is installed globally, navigate to your project directory and run `elemon`, instead of running `node node_modules/.bin/elemon`.
+If `elemon` is installed globally, in your project directory run `elemon`, instead of running `node node_modules/.bin/elemon`.
 
 *Important Notice: For any reasons, if you want to quit your running `electron` application immediately, please don't close the app by just clicking on the close button. Instead, terminate (Ctrl-C) the running `elemon` process and your running application will be terminated accordingly.*
 
