@@ -16,7 +16,7 @@ If `elemon` is installed locally, while you are in your project's directory, sim
 
 *Important Notice: For any reasons, if you want to quit your running `electron` application immediately, please don't close the app by just clicking on the close button. Instead, terminate (Ctrl-C) the running `elemon` process and your running application will be terminated accordingly.*
 
-That's it. Have fun writing your [electron](https://github.com/electron/electron) application.
+That's it. Have fun writing your [electron](https://github.com/electron/electron) applications.
 
 
 [travis-image]: https://img.shields.io/travis/mawni/elemon/master.svg
