@@ -1,7 +1,7 @@
 {
   "name": "elemon",
   "version": "1.0.3",
-  "description": "Monitor electron application and automatically reload the running app upon any changes",
+  "description": "A tiny module that monitors electron application and automatically reloads the running app upon any changes",
   "main": "elemon.js",
   "bin": {
     "elemon": "./elemon.js"
