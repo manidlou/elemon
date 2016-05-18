@@ -4,7 +4,7 @@
  * elemon.js
  * This software is released under the MIT license:
  * 
- * Copyright (c) <2016> <Mawni Maghsoudlou>
+ * Copyright (c) 2016 Mawni Maghsoudlou
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
  * this software and associated documentation files (the "Software"), to deal in
@@ -37,28 +37,38 @@ const ELEC_BIN = './node_modules/.bin/electron';
 
 var elec_proc = spawn(ELEC_BIN, ['.'], {detached: true});
 
-elec_proc.stderr.on('data', function(data) {
-  console.log('|\n--> elemon error: ', data);
-  process.exit(0);
-});
-
 elec_proc.on('error', function(err) {
-  console.log('|\n--> elemon error: something went wrong -> ', err);
+  console.log('|\n-> elemon error: failed to start electron main process -> ', err);
+  if (elec_proc.pid !== null) {
+    elec_proc.stdin.end();
+    process.kill(-elec_proc.pid);
+    process.exit(0);
+  }
+});
+
+process.on('SIGINT', function() {
+  elec_proc.stdin.end();
+  process.kill(-elec_proc.pid);
   process.exit(0);
 });
 
-watch(process.cwd(), function(file) {
-  elec_proc.stderr.on('data', function(data) {
-    console.log('|\n--> elemon error: ', data);
-    process.exit(0);
-  });
-  elec_proc.on('error', function(err) {
-    console.log('|\n--> elemon error: something went wrong -> ', err);
-    process.exit(0);
-  });
+process.on('SIGTERM', function() {
+  elec_proc.stdin.end();
+  process.kill(-elec_proc.pid);
+  process.exit(0);
+});
+
+elec_proc.stderr.on('data', function(data) {
+  console.log('|\n-> elemon error: ', data);
+  elec_proc.stdin.end();
+  process.kill(-elec_proc.pid);
+  process.exit(0);
+
+});
+
+watch(process.cwd(), function() {
   elec_proc.stdin.end();
   process.kill(-elec_proc.pid);
   elec_proc = spawn(ELEC_BIN, ['.'], {detached: true});
-  console.log('|\n--> elemon: electron reloaded due to [' + file + ']');
 });
 

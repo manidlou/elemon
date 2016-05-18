@@ -4,7 +4,7 @@
 
 elemon is a tiny [node.js](https://nodejs.org) module that monitors an [electron](https://github.com/electron/electron) application and automatically reloads the running application upon any changes. It simply means, instead of you typing `./node_modules/.bin/electron .` or `npm start` each time that you want to run your application during development, you let `elemon` do it for you. So, `elemon` can easily be used as a light and practical dynamic-reload (live-reload) tool for developing [electron](https://github.com/electron/electron) applications.
 ####Install
-Please use `npm install --save-dev elemon`. Also, you can use `npm install -g elemon`. The only difference is related to how you want to call `elemon` binary. Please read below to see what it means.
+Please use `npm install --save-dev elemon`. Also, you can use `npm install -g elemon`. The only difference between them is related to how you want to call `elemon` binary. Please read below to see what it means.
 
 **Notice**: It is naturally presumed that [electron-prebuilt](https://github.com/electron-userland/electron-prebuilt) already installed locally and is located in `/yourproj/node_modules/.bin/electron` since `elemon` uses that binary to spawn your application. So, if you haven't installed it yet, please first use `npm install --save-dev electron-prebuilt`, then install `elemon`.
 
@@ -14,6 +14,8 @@ In order to use `elemon` locally, when you normally run your local `electron` bi
 `elemon` runs your [electron](https://github.com/electron/electron) application and watches the project directory. Upon any changes, it kills the group of all processes that are associated with spawned `electron` process and automatically reloads the application. So, you can immediately see the result of the changes that you just made.
 
 If `elemon` is installed globally, navigate to your project directory and run `elemon`, instead of running `node node_modules/.bin/elemon`.
+
+*Important Notice: For any reasons, if you want to quit your running `electron` application immediately, please don't close the app by just clicking on the close button. Instead, terminate (Ctrl-C) the running `elemon` process and your running application will be terminated accordingly.*
 
 That's it. Have fun writing your [electron](https://github.com/electron/electron) application.
 
