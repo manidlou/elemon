@@ -1,0 +1,32 @@
+{
+  "name": "elemon",
+  "version": "1.0.0",
+  "description": "monitor electron application and automatically reload the running app upon any changes",
+  "main": "elemon.js",
+  "bin": {
+    "elemon": "./elemon.js"
+  },
+  "scripts": {
+    "test": "./node_modules/.bin/mocha --reporter spec ./test/*.js"
+  },
+  "keywords": [
+    "electron"
+  ],
+  "author": "Mawni Maghsoudlou",
+  "license": "MIT",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^2.4.5"
+  },
+  "dependencies": {
+    "node-watch": "^0.3.5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mawni/elemon.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mawni/elemon/issues"
+  },
+  "homepage": "https://github.com/mawni/elemon#readme"
+}
