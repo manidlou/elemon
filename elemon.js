@@ -31,11 +31,6 @@
 
 'use strict';
 
-/**
- * Module dependencies.
- * @private
- */
-
 const watch = require('node-watch');
 const spawn = require('child_process').spawn;
 const ELEC_BIN = './node_modules/.bin/electron';
@@ -43,25 +38,27 @@ const ELEC_BIN = './node_modules/.bin/electron';
 var elec_proc = spawn(ELEC_BIN, ['.'], {detached: true});
 
 elec_proc.stderr.on('data', function(data) {
-  console.log('|\n-> elemon error: ' + data);
-});
-
-elec_proc.on('error', function(err) {
-  console.log('|\n-> elemon error: something went wrong -> ', err);
+  console.log('|\n--> elemon error: ', data);
   process.exit(0);
 });
 
-watch(process.cwd(), function(filename) {
+elec_proc.on('error', function(err) {
+  console.log('|\n--> elemon error: something went wrong -> ', err);
+  process.exit(0);
+});
+
+watch(process.cwd(), function(file) {
   elec_proc.stderr.on('data', function(data) {
-    console.log('|\n-> elemon error: ', data);
+    console.log('|\n--> elemon error: ', data);
+    process.exit(0);
   });
   elec_proc.on('error', function(err) {
-    console.log('|\n-> elemon error: something went wrong -> ', err);
+    console.log('|\n--> elemon error: something went wrong -> ', err);
     process.exit(0);
   });
   elec_proc.stdin.end();
   process.kill(-elec_proc.pid);
   elec_proc = spawn(ELEC_BIN, ['.'], {detached: true});
-  console.log('|\n-> elemon -> electron reloaded due to [' + filename + ']');
+  console.log('|\n--> elemon: electron reloaded due to [' + file + ']');
 });
 

@@ -10,12 +10,15 @@
     "test": "./node_modules/.bin/mocha --reporter spec ./test/*.js"
   },
   "keywords": [
-    "electron"
+    "electron",
+    "live-reload",
+    "electron monitor"
   ],
   "author": "Mawni Maghsoudlou",
   "license": "MIT",
   "devDependencies": {
     "chai": "^3.5.0",
+    "electron-prebuilt": "^1.1.0",
     "mocha": "^2.4.5"
   },
   "dependencies": {

@@ -1,8 +1,8 @@
 #elemon
 
-[![travis build][travis-image]][travis-url] [![npm version][npm-image]][npm-url] 
+[![npm version][npm-image]][npm-url] 
 
-elemon is a tiny [node.js](https://nodejs.org) module that monitors an [electron](https://github.com/electron/electron) application (kind of similar to what [nodemon](https://github.com/remy/nodemon) does for a node application, but maybe not as sophisticated as nodemon!) and automatically reloads the running application upon any changes. It simply means, instead of you typing `./node_modules/.bin/electron .` or `npm start` each time that you want to run your application during development, you let `elemon` do it for you. So, `elemon` can easily be used as a light and practical dynamic-reload (live-reload) tool for developing [electron](https://github.com/electron/electron) applications.
+elemon is a tiny [node.js](https://nodejs.org) module that monitors an [electron](https://github.com/electron/electron) application and automatically reloads the running application upon any changes. It simply means, instead of you typing `./node_modules/.bin/electron .` or `npm start` each time that you want to run your application during development, you let `elemon` do it for you. So, `elemon` can easily be used as a light and practical dynamic-reload (live-reload) tool for developing [electron](https://github.com/electron/electron) applications.
 #####Install
 Please use `npm install --save-dev elemon`. Also, you can use `npm install -g elemon`. The only difference is related to how you want to call `elemon` binary. Please read below to see what it means.
 
