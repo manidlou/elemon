@@ -1,10 +1,13 @@
 {
   "name": "elemon",
   "version": "1.0.4",
-  "description": "A tiny module that monitors electron application and automatically reloads the running app upon any changes",
+  "description": "live-reload tool for developing electron application",
   "main": "elemon.js",
   "bin": {
     "elemon": "./elemon.js"
+  },
+  "scripts": {
+    "test": "./node_modules/.bin/mocha --reporter spec ./test/tester.js"
   },
   "keywords": [
     "electron",
@@ -14,9 +17,18 @@
   ],
   "author": "Mawni Maghsoudlou",
   "license": "MIT",
-  "devDependencies": {},
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "electron-prebuilt": "^1.1.0",
+    "electron-rebuild": "^1.1.4",
+    "mocha": "^2.4.5"
+  },
   "dependencies": {
-    "node-watch": "^0.3.5"
+    "chokidar": "^1.5.0",
+    "is-running": "^2.0.0",
+    "node-static": "^0.7.7",
+    "socket.io": "^1.4.6",
+    "socket.io-client": "^1.4.6"
   },
   "repository": {
     "type": "git",

@@ -1,8 +1,8 @@
 #elemon
 
-[![npm version][npm-image]][npm-url] 
+[![travis build][travis-image]][travis-url] [![npm version][npm-image]][npm-url] 
 
-`elemon` is a tiny [node.js](https://nodejs.org) module that monitors an [electron](https://github.com/electron/electron) application and automatically reloads the running application upon any changes. It simply means, instead of you typing `./node_modules/.bin/electron .` or `npm start` each time that you want to run your application during development, you let `elemon` do it for you. So, it can easily be used as a light and practical dynamic-reload (live-reload) tool for developing [electron](https://github.com/electron/electron) applications.
+`elemon` is a [node.js](https://nodejs.org) module that tries relatively hard to cleanly monitor an [electron](https://github.com/electron/electron) application and automatically reloads the app upon any changes. It sets up an static server using [node-static](https://github.com/cloudhead/node-static) and [socket.io](https://github.com/socketio/socket.io) in order to have the ability to spawn the electron main process and cleanly terminate the process upon changes in the main script file. Notice it only terminates and reloads the entire app (main process) if the main script file is the one that you changed. For all files other than the main app file, it only reloads the corresponding browser window that is associated with the changed file (just notice the appdata in the example down below). So, it can easily be used as a practical live-reload tool for developing [electron](https://github.com/electron/electron) application.
 ####Install
 Please use `npm install --save-dev elemon`. Also, you can use `npm install -g elemon`. The only difference between them is related to how you want to call `elemon` binary. Please read *how to use* section to see what it means.
 
@@ -11,13 +11,126 @@ Please use `npm install --save-dev elemon`. Also, you can use `npm install -g el
 ####How to use
 If `elemon` is installed locally, while you are in your project's directory, simply run `node ./node_modules/.bin/elemon`. If it is installed globally, in your project directory run `elemon`, instead of running `node node_modules/.bin/elemon`.
 
-`elemon` runs your [electron](https://github.com/electron/electron) application and watches the project directory. Upon any changes, it kills the group of all processes that are associated with spawned `electron` process and automatically reloads the application. So, you can immediately see the result of the changes that you just made.
-
 
 *Important Notice: For any reasons, if you want to quit your running `electron` application immediately, please don't close the app by just clicking on the close button. Instead, terminate (Ctrl-C) the running `elemon` process and your running application will be terminated accordingly.*
 
-That's it. Have fun writing your [electron](https://github.com/electron/electron) applications.
+If you want to use `elemon`, you just need to pass a few reasonable data to the local server. It needs the following data:
 
+**1. The main script (main app) file name** (exp: `app.js`)
+
+**2. The id of every browser window in your application**
+
+**3. Optionally, the name of all reources (js, css, and other files) that are associated with the specific browser window**
+
+####Example
+
+Suppose it is the app file structure,
+
+```
+yourproj
+  |__view
+  |     |__windows
+  |     |   |__main-win
+  |     |   |	 |__mainwin.html
+	|     |   |
+  |     |   |__second-win
+  |     |      |__secwin.html
+  |     |      |__secwin-controller.js
+  |     |
+  |     |__style
+  |         |__photon.min.css
+  |
+  |__app.js
+
+```
+
+
+```javascript
+'use strict';
+
+const electron = require('electron');
+const app = electron.app;
+const BrowserWindow = electron.BrowserWindow;
+const elemon_client = require('./elemon-client.js');
+const g_wins = [];
+
+function create_wins() {
+  main_win = new BrowserWindow({
+    width: 800,
+    height: 600
+  });
+  main_win.loadURL('file://' + __dirname + '/view/windows/main-win/mainwin.html');
+  
+  second_win = new BrowserWindow({
+  	width: 500,
+  	height: 300
+	});
+	second_win.loadURL('file://' + __dirname + '/view/windows/second-win/secwin.html');
+  // ... and all other usual stuff
+	
+	g_wins.push(main_win);
+	g_wins.push(second_win);
+}
+
+app.on('ready', function() {
+  create_wins();
+  
+  elemon_client.socket.emit('appdata', {
+  	main_script: 'app.js',
+		browserWindows: [{
+			id: main_win.id,
+			resources: ['mainwin.html', 'photon.min.css']
+		}, {
+			id: second_win.id,
+			resources: ['secwin.html', 'secwin-controller.js', 'photon.min.css']
+		}]
+	});
+});
+
+elemon_client.socket.on('reload', function(data) {
+	elemon_client.reload(g_wins, data);
+});
+```
+####api
+*(better api docs is going the be added soon!)*
+`elemon-client` is a [socket.io-client](https://github.com/socketio/socket.io-client) and is exposed as you install `elemon`. It supports the following events:
+
+Event: 'appdata'
+emit the app required data for live-reload to the server.
+
+Event: 'reload'
+on `reload` event, reload windows (or app if main file is the changed file)
+
+```javascript
+
+const electron = require('electron');
+const app = electron.app;
+const BrowserWindow = electron.BrowserWindow;
+const elemon_client = require('./elemon-client.js');
+const g_wins = [];
+
+// we use the previous example data
+
+var yourAppData = {
+  main_script: 'app.js',
+	browserWindows: [{
+		id: main_win.id,
+		resources: ['mainwin.html', 'photon.min.css']
+	}, {
+		id: second_win.id,
+		resources: ['secwin.html', 'secwin-controller.js', 'photon.min.css']
+	}]
+};
+
+clientSocket.emit('appdata', yourAppData);
+
+elemon_client.socket.on('reload', function(data) {
+	elemon_client.reload(wins, data);
+});
+
+```
+		
+That's it. Have fun writing your [electron](https://github.com/electron/electron) applications.
 
 [travis-image]: https://img.shields.io/travis/mawni/elemon/master.svg
 [travis-url]: https://travis-ci.org/mawni/elemon
