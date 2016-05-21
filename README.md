@@ -2,7 +2,7 @@
 
 [![travis build][travis-image]][travis-url] [![npm version][npm-image]][npm-url] 
 
-`elemon` is a [node.js](https://nodejs.org) module that tries relatively hard to cleanly monitor an [electron](https://github.com/electron/electron) application and automatically reloads the app upon any changes. It sets up an static server using [node-static](https://github.com/cloudhead/node-static) and [socket.io](https://github.com/socketio/socket.io) in order to have the ability to spawn the electron main process and cleanly terminate the process upon changes in the main script file. Notice it only terminates and reloads the entire app (main process) if the main script file is the one that you changed. For all files other than the main app file, it only reloads the corresponding browser window that is associated with the changed file (just notice the appdata in the example down below). So, it can easily be used as a practical live-reload tool for developing [electron](https://github.com/electron/electron) application.
+`elemon` is a [node.js](https://nodejs.org) module that tries to cleanly monitor an [electron](https://github.com/electron/electron) application and automatically reloads the app upon any changes. It sets up an static server using [node-static](https://github.com/cloudhead/node-static) and [socket.io](https://github.com/socketio/socket.io) in order to have the ability to spawn the electron main process and cleanly terminate the process upon changes in the main script file and reloads the app. Notice it only terminates and reloads the entire app (main process) if the main script file is the one that you changed. For all files other than the main app file, it only reloads the corresponding browser window that is associated with the changed file (just notice the appdata in the example down below). So, it can easily be used as a practical live-reload tool for developing [electron](https://github.com/electron/electron) application.
 ####Install
 Please use `npm install --save-dev elemon`. Also, you can use `npm install -g elemon`. The only difference between them is related to how you want to call `elemon` binary. Please read *how to use* section to see what it means.
 
@@ -20,7 +20,7 @@ If you want to use `elemon`, you just need to pass a few reasonable data to the 
 
 **2. The id of every browser window in your application**
 
-**3. Optionally, the name of all reources (js, css, and other files) that are associated with the specific browser window**
+**3. The name (only filename is enough, no need the file's path) of all resources (js, css, and other files) that are associated with the specific browser window**
 
 ####Example
 
@@ -42,7 +42,9 @@ yourproj
   |__app.js
 ```
 
-then, we can use `elemon` like this,
+then, in the main process file where usually app and browser windows are created,
+
+*app.js*
 ```javascript
 'use strict';
 
@@ -64,8 +66,10 @@ function create_wins() {
     height: 300
   });
   second_win.loadURL('file://' + __dirname + '/view/windows/second-win/secwin.html');
+  
   // ... and all other usual stuff
   
+  // keep the reference to the all browser windows for live-reload
   g_wins.push(main_win);
   g_wins.push(second_win);
 }
@@ -91,13 +95,16 @@ elemon_client.socket.on('reload', function(data) {
 ```
 ####api
 *(better api docs is going the be added soon!)*
+
 `elemon-client` is a [socket.io-client](https://github.com/socketio/socket.io-client) and is exposed as you install `elemon`. By default, it listens to the port `process.env.PORT || 19024`. It supports the following events:
 
-Event: 'appdata'
-emit the app required data for live-reload to the server.
+**Event**: 'appdata'
 
-Event: 'reload'
-on `reload` event, reload windows (or app if main file is the changed file)
+emit the `appdata` event with the app required data for live-reload to the server.
+
+**Event**: 'reload'
+
+on `reload` event, reload app
 
 ```javascript
 const electron = require('electron');
