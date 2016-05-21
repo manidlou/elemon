@@ -100,11 +100,11 @@ elemon_client.socket.on('reload', function(data) {
 
 **Event**: 'appdata'
 
-emit the `appdata` event with the app required data for live-reload to the server.
+emit the `appdata` event with the required data for live-reload to the server.
 
 **Event**: 'reload'
 
-on `reload` event, reload app
+on `reload` event, reload app.
 
 ```javascript
 const electron = require('electron');
