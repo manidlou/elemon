@@ -91,7 +91,7 @@ elemon_client.socket.on('reload', function(data) {
 ```
 ####api
 *(better api docs is going the be added soon!)*
-`elemon-client` is a [socket.io-client](https://github.com/socketio/socket.io-client) and is exposed as you install `elemon`. It supports the following events:
+`elemon-client` is a [socket.io-client](https://github.com/socketio/socket.io-client) and is exposed as you install `elemon`. By default, it listens to the port `process.env.PORT || 19024`. It supports the following events:
 
 Event: 'appdata'
 emit the app required data for live-reload to the server.
