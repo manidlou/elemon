@@ -20,9 +20,9 @@
   const running = require('is-running');
   const path = require('path');
   const spawn = require('child_process').spawn;
-  const ELEC_BIN = './node_modules/.bin/electron';
   const port = process.env.PORT || 19024;
   const file = new(nodestatic.Server)();
+  const ELEC_BIN = process.cwd() + '/.bin/electron';
   const ELEC_BIN_ARG = process.argv[2];
 
   var server = require('http').createServer(function(req, res) {
@@ -56,7 +56,7 @@
   var watcher = chok.watch('.', opts);
   var g_elec_proc = spawn(ELEC_BIN, [ELEC_BIN_ARG], {detached: true});
 
-  g_elec_proc.on('error', function() {
+  process.on('error', function() {
     console.error('|\n-> elemon err:\n', '|\n-> elemon err: failed to start electron process. please make sure electron is locally installed and \'./node_modules/.bin/electron\' is available in your project directory.');
     terminate_elec_proc(g_elec_proc, function(err) {
       if (err !== null) {
@@ -70,7 +70,6 @@
 
   g_elec_proc.stderr.on('data', function(data) {
     if (running(g_elec_proc.pid) && data !== null) {
-      console.error('|\n-> elemon err:', 'bad argument. please provide the project directory (\'.\') or the main app as the argument.\n');
       terminate_elec_proc(g_elec_proc, function(err) {
         if (err !== null) {
           throw err;
@@ -80,7 +79,6 @@
         }
       });
     } else if (running(g_elec_proc.pid) && data === null) {
-      console.error('|\n-> elemon err:', 'failed to start electron process. please make sure electron is locally installed and \'./node_modules/.bin/electron\' is available in your project directory.\n');
       terminate_elec_proc(g_elec_proc, function(err) {
         if (err !== null) {
           throw err;
