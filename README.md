@@ -122,7 +122,7 @@ var yourAppData = {
 clientSocket.emit('appdata', yourAppData);
 
 elemon_client.socket.on('reload', function(data) {
-  elemon_client.reload(wins, data);
+  elemon_client.reload(g_wins, data);
 });
 ```
 That's it. Have fun writing your [electron](https://github.com/electron/electron) applications.
