@@ -1,3 +1,16 @@
+/*!
+ * elemon-client.js
+ * 
+ * Copyright (c) 2016 Mawni Maghsoudlou
+ * Released under the MIT license
+ */
+
+/**
+ * elemon client socket for elemon server
+ */
+
+'use strict';
+
 const port = process.env.PORT || 19024;
 const client_socket = require('socket.io-client')('http://localhost:' + port.toString());
 const running = require('is-running');
