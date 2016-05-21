@@ -25,14 +25,13 @@ If you want to use `elemon`, you just need to pass a few reasonable data to the 
 ####Example
 
 Suppose it is the app file structure,
-
 ```
 yourproj
   |__view
   |     |__windows
   |     |   |__main-win
   |     |   |	 |__mainwin.html
-	|     |   |
+  |     |   |
   |     |   |__second-win
   |     |      |__secwin.html
   |     |      |__secwin-controller.js
@@ -41,10 +40,9 @@ yourproj
   |         |__photon.min.css
   |
   |__app.js
-
 ```
 
-
+then, we can use `elemon` like this,
 ```javascript
 'use strict';
 
@@ -62,33 +60,33 @@ function create_wins() {
   main_win.loadURL('file://' + __dirname + '/view/windows/main-win/mainwin.html');
   
   second_win = new BrowserWindow({
-  	width: 500,
-  	height: 300
-	});
-	second_win.loadURL('file://' + __dirname + '/view/windows/second-win/secwin.html');
+    width: 500,
+    height: 300
+  });
+  second_win.loadURL('file://' + __dirname + '/view/windows/second-win/secwin.html');
   // ... and all other usual stuff
-	
-	g_wins.push(main_win);
-	g_wins.push(second_win);
+  
+  g_wins.push(main_win);
+  g_wins.push(second_win);
 }
 
 app.on('ready', function() {
   create_wins();
   
   elemon_client.socket.emit('appdata', {
-  	main_script: 'app.js',
-		browserWindows: [{
-			id: main_win.id,
-			resources: ['mainwin.html', 'photon.min.css']
-		}, {
-			id: second_win.id,
-			resources: ['secwin.html', 'secwin-controller.js', 'photon.min.css']
-		}]
-	});
+    main_script: 'app.js',
+    browserWindows: [{
+      id: main_win.id,
+      resources: ['mainwin.html', 'photon.min.css']
+    }, {
+      id: second_win.id,
+      resources: ['secwin.html', 'secwin-controller.js', 'photon.min.css']
+    }]
+  });
 });
 
 elemon_client.socket.on('reload', function(data) {
-	elemon_client.reload(g_wins, data);
+  elemon_client.reload(g_wins, data);
 });
 ```
 ####api
@@ -102,7 +100,6 @@ Event: 'reload'
 on `reload` event, reload windows (or app if main file is the changed file)
 
 ```javascript
-
 const electron = require('electron');
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
@@ -113,23 +110,21 @@ const g_wins = [];
 
 var yourAppData = {
   main_script: 'app.js',
-	browserWindows: [{
-		id: main_win.id,
-		resources: ['mainwin.html', 'photon.min.css']
-	}, {
-		id: second_win.id,
-		resources: ['secwin.html', 'secwin-controller.js', 'photon.min.css']
-	}]
+  browserWindows: [{
+    id: main_win.id,
+    resources: ['mainwin.html', 'photon.min.css']
+  }, {
+    id: second_win.id,
+    resources: ['secwin.html', 'secwin-controller.js', 'photon.min.css']
+  }]
 };
 
 clientSocket.emit('appdata', yourAppData);
 
 elemon_client.socket.on('reload', function(data) {
-	elemon_client.reload(wins, data);
+  elemon_client.reload(wins, data);
 });
-
 ```
-		
 That's it. Have fun writing your [electron](https://github.com/electron/electron) applications.
 
 [travis-image]: https://img.shields.io/travis/mawni/elemon/master.svg
