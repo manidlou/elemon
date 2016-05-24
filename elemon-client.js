@@ -12,7 +12,7 @@
 'use strict';
 
 const port = process.env.PORT || 19024;
-const client_socket = require('socket.io-client')('http://localhost:' + port.toString());
+const client_socket = require('socket.io-client')('http://localhost:' + port);
 const running = require('is-running');
 
 function reload(wins, data) {

@@ -59,7 +59,7 @@ describe("run the test app and set up the watcher", function() {
   });
 });
 
-describe('test elemon exported terminate process function', function() {
+describe('test elemon terminate process function', function() {
   var elemon_proc = cp_exec('node elemon.js test/testapp/app.js', {detached: true});
   it ('if try to kill the same process should throw err', function(done) {
     elemon_terminate_func.terminate(elemon_proc, function(err) {
