@@ -4,16 +4,19 @@
 
 `elemon` is a [node.js](https://nodejs.org) module that tries to cleanly monitor an [electron](https://github.com/electron/electron) application and automatically reloads the app upon any changes. It sets up an static server using [node-static](https://github.com/cloudhead/node-static) and [socket.io](https://github.com/socketio/socket.io) in order to have the ability to spawn the electron main process and cleanly terminate it upon changes in the main script file and reloads the app. Notice it only reloads the entire app (main process) if the main script file is the one that you changed. For all files other than the main app file, it only reloads the corresponding browser window(s) that is associated with the changed file (just notice the example down below). So, it can easily be used as a practical live-reload tool for developing [electron](https://github.com/electron/electron) application.
 ####Install
-Please use `npm install --save-dev elemon`. Also, you can use `npm install -g elemon`. The only difference between them is related to how you want to call `elemon` binary. Please read *how to use* section to see what it means.
+Please use `npm install --save-dev elemon`.
 
 ####How to use
-While you are in your project's directory, simply run:
+
+It is naturally presumed that [electron-prebuilt](https://github.com/electron-userland/electron-prebuilt) is installed either locally or globally in your system and `electron` binaries are available.
+
+So, while you are in your project's directory, simply run:
 
 `./node_modules/.bin/elemon ./node_modules/.bin/electron .` 
 
 The argument `.` is any valid `electron` argument.
 
-Or if you want, you can supply it as one your `scripts` in your `package.json` like,
+Or if you want, you can supply it as one your `scripts` in your `package.json`,
 
 ```javascript
 "scripts": {
@@ -21,6 +24,11 @@ Or if you want, you can supply it as one your `scripts` in your `package.json` l
 }
 ```
 and then, just run `npm start`.
+
+If [electron-prebuilt](https://github.com/electron-userland/electron-prebuilt) is installed globally, simply run:
+
+`./node_modules/.bin/elemon electron .`
+
 
 *Important Notice: For any reasons, if you want to quit your running `electron` application immediately, please don't close the app by just clicking on the close button. Instead, terminate (Ctrl-C) the running `elemon` process and your running application will be terminated accordingly and cleanly.*
 
