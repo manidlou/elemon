@@ -94,29 +94,19 @@ elemon_client.socket.on('reload', function(data) {
   elemon_client.reload(g_wins, data);
 });
 ```
-####api
+####elemon-client api
 *(better api docs is going the be added soon!)*
 
 `elemon-client` is a [socket.io-client](https://github.com/socketio/socket.io-client) and is exposed as you install `elemon`. By default, it listens to the port `process.env.PORT || 19024`. It supports the following events:
 
-**Event**: 'appdata'
+**client socket event**: 'appdata'
 
 emit the `appdata` event with the required data for live-reload to the server.
 
-**Event**: 'reload'
-
-on `reload` event, reload app.
-
+*example*
 ```javascript
-const electron = require('electron');
-const app = electron.app;
-const BrowserWindow = electron.BrowserWindow;
 const elemon_client = require('elemon/elemon-client');
-const g_wins = [];
-
-// we use the previous example data
-
-var yourAppData = {
+elemon_client.socket.emit('appdata', {
   main_script: 'app.js',
   browserWindows: [{
     id: main_win.id,
@@ -125,14 +115,19 @@ var yourAppData = {
     id: second_win.id,
     resources: ['secwin.html', 'secwin-controller.js', 'photon.min.css']
   }]
-};
+});
+```
+**client socket event**: 'reload'
 
-elemon_client.socket.emit('appdata', yourAppData);
+on `reload` event, reload the app.
 
+*example*
+```javascript
 elemon_client.socket.on('reload', function(data) {
   elemon_client.reload(g_wins, data);
 });
 ```
+
 That's it. Have fun writing your [electron](https://github.com/electron/electron) applications.
 
 [travis-image]: https://img.shields.io/travis/mawni/elemon/master.svg
