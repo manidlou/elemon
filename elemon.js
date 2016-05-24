@@ -9,7 +9,7 @@
 
 /**
  * elemon is a live-reload tool for developing electron application. It monitors an electron application
- * during development and automatically reloads the application upon any changes.
+ * during development and automatically reloads it upon any changes.
  */
 
 (function() {
@@ -60,9 +60,7 @@
     console.error('|\n-> elemon err:\n', '|\n-> elemon err: failed to start electron process. please make sure electron is locally installed and \'./node_modules/.bin/electron\' is available in your project directory.');
     terminate_elec_proc(g_elec_proc, function(err) {
       if (err !== null) {
-        throw err;
-      } else {
-        console.log();
+        console.error('|\n-> elemon err:\n', err);
         process.exit(0);
       }
     });
@@ -70,8 +68,15 @@
 
   g_elec_proc.stderr.on('data', function(data) {
     if (data !== null) {
-      console.error('|\n-> elemon err:\n', data.toString());
-      process.exit(0);
+      console.error('|\n-> elemon err:\n' + data.toString());
+      terminate_elec_proc(g_elec_proc, function(err) {
+        if (err !== null) {
+          throw new Error('|\n-> elemon err:\n' + err);
+        } else {
+          console.log();
+          process.exit(0);
+        }
+      });
     }
   });
 
@@ -80,7 +85,7 @@
       console.log('|\n-> elemon: electron app exited with code: ', code);
       terminate_elec_proc(g_elec_proc, function(err) {
         if (err !== null) {
-          throw err;
+          throw new Error('|\n-> elemon err:\n' + err);
         } else {
           console.log();
           process.exit(0);
@@ -89,7 +94,7 @@
     } else if (sig === null && code === null) {
       terminate_elec_proc(g_elec_proc, function(err) {
         if (err !== null) {
-          throw err;
+          throw new Error('|\n-> elemon err:\n' + err);
         } else {
           console.log();
           process.exit(0);
@@ -101,7 +106,7 @@
   process.on('SIGINT', function() {
     terminate_elec_proc(g_elec_proc, function(err) {
       if (err !== null) {
-        throw err;
+        throw new Error('|\n-> elemon err:\n' + err);
       } else {
         console.log();
         process.exit(0);
@@ -112,7 +117,7 @@
   process.on('SIGTERM', function() {
     terminate_elec_proc(g_elec_proc, function(err) {
       if (err !== null) {
-        throw err;
+        throw new Error('|\n-> elemon err:\n' + err);
       } else {
         console.log();
         process.exit(0);
@@ -123,7 +128,7 @@
   process.on('SIGHUP', function() {
     terminate_elec_proc(g_elec_proc, function(err) {
       if (err !== null) {
-        throw err;
+        throw new Error('|\n-> elemon err:\n' + err);
       } else {
         console.log();
         process.exit(0);
@@ -140,7 +145,7 @@
         if (path.basename(file) === main_script) {
           terminate_elec_proc(g_elec_proc, function(err) {
             if (err !== null) {
-              throw err;
+              throw new Error('|\n-> elemon err:\n' + err);
             } else {
               g_elec_proc = spawn(ELEC_BIN, [ELEC_BIN_ARG], {detached: true});
             }

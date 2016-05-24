@@ -13,6 +13,15 @@ While you are in your project's directory, simply run:
 
 The argument `.` is any valid `electron` argument.
 
+Or if you want, you can supply it as one your `scripts` in your `package.json` like,
+
+```javascript
+"scripts": {
+  "start": "./node_modules/.bin/elemon ./node_modules/.bin/electron ."
+}
+```
+and then, just run `npm start`.
+
 *Important Notice: For any reasons, if you want to quit your running `electron` application immediately, please don't close the app by just clicking on the close button. Instead, terminate (Ctrl-C) the running `elemon` process and your running application will be terminated accordingly and cleanly.*
 
 If you want to use `elemon`, you just need to pass a few reasonable data to the local server. It needs the following data:
@@ -95,8 +104,6 @@ elemon_client.socket.on('reload', function(data) {
 });
 ```
 ####elemon-client api
-*(better api docs is going the be added soon!)*
-
 `elemon-client` is a [socket.io-client](https://github.com/socketio/socket.io-client) and is exposed as you install `elemon`. By default, it listens to the port `process.env.PORT || 19024`. It supports the following events:
 
 **client socket event**: 'appdata'

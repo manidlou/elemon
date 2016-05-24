@@ -71,4 +71,3 @@ elemon.socket.on('reload', function(data) {
 process.on('uncaughtException', function(err) {
 	console.log('uncaught exception found:', err);
 });
-
