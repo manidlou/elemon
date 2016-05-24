@@ -71,7 +71,8 @@ const electron = require('electron');
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
 const elemon_client = require('elemon/elemon-client');
-const g_wins = [];
+
+var g_wins = []; // keep the refrence to all browser windows
 
 function create_wins() {
   main_win = new BrowserWindow({

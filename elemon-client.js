@@ -6,7 +6,7 @@
  */
 
 /**
- * elemon client socket for elemon server
+ * elemon client module for elemon server
  */
 
 'use strict';
