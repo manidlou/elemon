@@ -20,7 +20,7 @@
   const running = require('is-running');
   const path = require('path');
   const spawn = require('child_process').spawn;
-  const static_file = new(nodestatic.Server)();
+  const static_file = new nodestatic.Server();
   const ELEC_BIN = process.argv[2];
   const ELEC_BIN_ARG = process.argv[3];
   const port = process.env.PORT || 19024;

@@ -96,7 +96,8 @@ function create_wins() {
 
 app.on('ready', function() {
   create_wins();
-  
+ 
+  // emit 'appdata' event with the required data for live-reload
   elemon_client.socket.emit('appdata', {
     main_script: 'app.js',
     browserWindows: [{
@@ -109,6 +110,7 @@ app.on('ready', function() {
   });
 });
 
+// listen to 'reload' event and reload the app
 elemon_client.socket.on('reload', function(data) {
   elemon_client.reload(g_wins, data);
 });
