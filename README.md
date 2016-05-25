@@ -115,7 +115,9 @@ elemon_client.socket.on('reload', function(data) {
   elemon_client.reload(g_wins, data);
 });
 ```
-####elemon-client api
+
+###elemon-client api
+
 `elemon-client` is a [socket.io-client](https://github.com/socketio/socket.io-client) and is exposed as you install `elemon`. By default, it listens to the port `process.env.PORT || 19024`. It supports the following events:
 
 **client socket event**: 'appdata'
