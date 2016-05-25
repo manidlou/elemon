@@ -13,6 +13,6 @@ node_js:
   - "0.8"
   - "0.6"
 before_install:
-  - npm install -g mocha
+  - npm install -g electron-prebuilt
 script:
   - npm test

@@ -17,7 +17,7 @@ So, while you are in your project's directory, simply run:
 
 The argument `.` is any valid `electron` argument.
 
-Or if you want, you can supply it as one your `scripts` in your `package.json`,
+Or if you want, you can use npm `scripts` in your `package.json`,
 
 ```javascript
 "scripts": {
@@ -55,8 +55,8 @@ yourproj
   |     |      |__secwin.html
   |     |      |__secwin-controller.js
   |     |
-  |     |__style
-  |         |__photon.min.css
+  |     |__stylesheets
+  |         |__style.css
   |
   |__app.js
 ```
@@ -72,7 +72,7 @@ const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
 const elemon_client = require('elemon/elemon-client');
 
-var g_wins = []; // keep the refrence to all browser windows
+var g_wins = []; // keep the reference to all browser windows
 
 function create_wins() {
   main_win = new BrowserWindow({
@@ -101,10 +101,10 @@ app.on('ready', function() {
     main_script: 'app.js',
     browserWindows: [{
       id: main_win.id,
-      resources: ['mainwin.html', 'photon.min.css']
+      resources: ['mainwin.html', 'style.css']
     }, {
       id: second_win.id,
-      resources: ['secwin.html', 'secwin-controller.js', 'photon.min.css']
+      resources: ['secwin.html', 'secwin-controller.js', 'style.css']
     }]
   });
 });
@@ -127,10 +127,10 @@ elemon_client.socket.emit('appdata', {
   main_script: 'app.js',
   browserWindows: [{
     id: main_win.id,
-    resources: ['mainwin.html', 'photon.min.css']
+    resources: ['mainwin.html', 'style.css']
   }, {
     id: second_win.id,
-    resources: ['secwin.html', 'secwin-controller.js', 'photon.min.css']
+    resources: ['secwin.html', 'secwin-controller.js', 'style.css']
   }]
 });
 ```

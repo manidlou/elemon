@@ -3,11 +3,11 @@
 const electron = require('electron');
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
-const elemon = require('../../elemon-client.js');
+const elemon_client = require('../../elemon-client.js');
 
 var main_win = null;
 var second_win = null;
-var wins = [];
+var g_wins = [];
 
 app.on('window-all-closed', function() {
   if (process.platform !== 'darwin') {
@@ -38,8 +38,8 @@ function create_wins() {
     second_win = null;
   });
   
-	wins.push(main_win);
-	wins.push(second_win);
+	g_wins.push(main_win);
+	g_wins.push(second_win);
 }
 
 app.on('activate', function() {
@@ -51,7 +51,7 @@ app.on('activate', function() {
 app.on('ready', function() {
   create_wins();
   
-  elemon.socket.emit('appdata', {
+  elemon_client.socket.emit('appdata', {
   	main_script: 'app.js',
 		browserWindows: [{
 			id: main_win.id,
@@ -64,8 +64,8 @@ app.on('ready', function() {
 
 });
 
-elemon.socket.on('reload', function(data) {
-	elemon.reload(wins, data);
+elemon_client.socket.on('reload', function(data) {
+	elemon_client.reload(g_wins, data);
 });
 
 process.on('uncaughtException', function(err) {

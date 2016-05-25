@@ -6,7 +6,7 @@
  */
 
 /**
- * elemon client module for elemon server
+ * elemon-client is the client module for elemon server
  */
 
 'use strict';

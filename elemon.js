@@ -20,13 +20,13 @@
   const running = require('is-running');
   const path = require('path');
   const spawn = require('child_process').spawn;
-  const file = new(nodestatic.Server)();
+  const static_file = new(nodestatic.Server)();
   const ELEC_BIN = process.argv[2];
   const ELEC_BIN_ARG = process.argv[3];
   const port = process.env.PORT || 19024;
 
   var server = require('http').createServer(function(req, res) {
-    file.serve(req, res);
+    static_file.serve(req, res);
   }).listen(port, function() {
     console.log('elemon server listening on port ' + port + '..');
   });
@@ -56,19 +56,10 @@
   var watcher = chok.watch('.', watch_opts);
   var g_elec_proc = spawn(ELEC_BIN, [ELEC_BIN_ARG], {detached: true});
 
-  process.on('error', function() {
-    console.error('|\n-> elemon err:\n', '|\n-> elemon err: failed to start electron process. please make sure electron is locally installed and \'./node_modules/.bin/electron\' is available in your project directory.');
-    terminate_elec_proc(g_elec_proc, function(err) {
-      if (err !== null) {
-        console.error('|\n-> elemon err:\n', err);
-        process.exit(0);
-      }
-    });
-  });
-
   g_elec_proc.stderr.on('data', function(data) {
     if (data !== null) {
       console.error('|\n-> elemon err:\n' + data.toString());
+      console.log('|\n-> elemon err: please provide a valid argument for electron');
       terminate_elec_proc(g_elec_proc, function(err) {
         if (err !== null) {
           throw new Error('|\n-> elemon err:\n' + err);
