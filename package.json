@@ -1,6 +1,6 @@
 {
   "name": "elemon",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "live-reload tool for developing electron application",
   "main": "elemon.js",
   "bin": {
