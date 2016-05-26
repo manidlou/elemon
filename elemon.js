@@ -49,7 +49,7 @@
       }
       return callback(null);
     } else {
-      callback(null);
+      return callback(null);
     }
   }
 

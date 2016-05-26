@@ -35,7 +35,7 @@ function terminate_proc(spawned_proc, callback) {
     }
     return callback(null);
   } else {
-    callback(null);
+    return callback(null);
   }
 }
 
