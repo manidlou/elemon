@@ -78,7 +78,7 @@ function create_wins() {
   });
 }
 
-... other usual stuff ...
+// ... and other usual stuff ... //
 
 app.on('ready', () => {
   create_wins();
