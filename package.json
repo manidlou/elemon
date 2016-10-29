@@ -3,20 +3,14 @@
   "version": "3.0.3",
   "description": "live-reload tool for developing electron application",
   "main": "elemon.js",
-  "scripts": {
-    "test": "./node_modules/.bin/mocha --reporter spec"
-  },
   "keywords": [
     "electron",
     "elemon",
-    "live-reload",
+    "electron live-reload",
     "electron-monitor"
   ],
   "author": "Mawni Maghsoudlou",
   "license": "MIT",
-  "engines": {
-    "node": ">=7.0.0"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/mawni/elemon.git"

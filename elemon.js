@@ -12,7 +12,6 @@
  */
 
 'use strict';
-
 const chok = require('chokidar');
 const path = require('path');
 
