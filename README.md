@@ -2,7 +2,7 @@
 
 [![npm version][npm-image]][npm-url] 
 
-`elemon` is a tiny module that tries to provide a simple and yet efficient live-reload tool for developing electron applications. You just need to pass the `app` and `BrowserWindows` and the name of the files that are associated with them as a parameter to the `elemon` function **after** your app is `ready`. Please check out the example below to see how you can easily use `elemon` to watch your app and cleanly reload it upon any changes. If the changed
+`elemon` is a tiny module that tries to provide a simple and yet efficient live-reload tool for developing [Electron](https://github.com/electron/electron) applications. You just need to pass the `app` and `BrowserWindows` and the name of the files that are associated with them as a parameter to the `elemon` function **after** your app is `ready`. Please check out the example below to see how you can easily use it to watch your app and cleanly reload it upon any changes. If the changed
 file is the main app file, then it `relaunch` the app and `exit` the current instance. If the changed file is a file that is associated with a browser window, then that window will only be reloaded.
 
 In fact, setting up a clean live-reload tool for developing an elenctron application is super simple by using the [Electron-api](https://github.com/electron/electron/tree/master/docs). The api already comes with whatever you need; just add a watcher (like [chokidar](https://github.com/paulmillr/chokidar) or whatever watcher you like) and you are all set.
