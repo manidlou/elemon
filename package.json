@@ -3,9 +3,6 @@
   "version": "3.0.3",
   "description": "live-reload tool for developing electron application",
   "main": "elemon.js",
-  "bin": {
-    "elemon": "./elemon.js"
-  },
   "scripts": {
     "test": "./node_modules/.bin/mocha --reporter spec"
   },
@@ -17,19 +14,8 @@
   ],
   "author": "Mawni Maghsoudlou",
   "license": "MIT",
-  "devDependencies": {
-    "chai": "^3.5.0",
-    "mocha": "^2.4.5"
-  },
-  "dependencies": {
-    "chokidar": "^1.5.0",
-    "is-running": "^2.0.0",
-    "node-static": "^0.7.7",
-    "socket.io": "^1.4.6",
-    "socket.io-client": "^1.4.6"
-  },
   "engines": {
-    "node": ">=4.0.0"
+    "node": ">=7.0.0"
   },
   "repository": {
     "type": "git",
@@ -38,5 +24,8 @@
   "bugs": {
     "url": "https://github.com/mawni/elemon/issues"
   },
-  "homepage": "https://github.com/mawni/elemon#readme"
+  "homepage": "https://github.com/mawni/elemon#readme",
+  "dependencies": {
+    "chokidar": "^1.6.1"
+  }
 }
