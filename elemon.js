@@ -1,6 +1,4 @@
-#!/usr/bin/env node
-
-/*!
+/**
  * elemon.js
  * 
  * Copyright (c) 2016 Mawni Maghsoudlou
