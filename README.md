@@ -1,6 +1,6 @@
 #elemon
 
-[![npm version][npm-image]][npm-url] 
+[![NPM](https://nodei.co/npm/elemon.png)](https://nodei.co/npm/elemon/)
 
 `elemon` is a tiny module that tries to provide a simple and yet efficient live-reload tool for developing [Electron](https://github.com/electron/electron) applications. You just need to pass the `app` and `BrowserWindows` and the name of the files that are associated with them as a parameter to the `elemon` function **after** your app is `ready`. Please check out the example below to see how you can easily use it to watch your app and cleanly reload it upon any changes. If the changed
 file is the main app file, then it `relaunch` the app and `exit` the current instance. If the changed file is a file that is associated with a browser window, then that window will only be reloaded.
@@ -94,5 +94,3 @@ app.on('ready', () => {
 
 That's it. Have fun writing your [Electron](https://github.com/electron/electron) applications.
 
-[npm-image]: https://img.shields.io/npm/v/elemon.svg?maxAge=2592000?style=flat-square
-[npm-url]: https://npmjs.org/package/elemon
