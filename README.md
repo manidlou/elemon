@@ -17,10 +17,10 @@ Please use `npm install --save-dev elemon`.
 
 `appOpts`: Object
 
-each option object has:
+the app option object has:
 
  * `app` ([app](https://github.com/electron/electron/blob/master/docs/api/app.md) object) _the main app object_
- * `res` (String) _main app file name_
+ * `res` (String) _the main app file name_
 
 `windowsOpts`: Array of objects
 
