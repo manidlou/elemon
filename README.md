@@ -92,7 +92,7 @@ app.on('ready', () => {
 
 ```
 
-That's it. Have fun writing your [electron](https://github.com/electron/electron) applications.
+That's it. Have fun writing your [Electron](https://github.com/electron/electron) applications.
 
 [npm-image]: https://img.shields.io/npm/v/elemon.svg?maxAge=2592000?style=flat-square
 [npm-url]: https://npmjs.org/package/elemon
