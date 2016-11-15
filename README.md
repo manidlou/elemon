@@ -15,14 +15,14 @@ Please use `npm install --save-dev elemon`.
 
 **elemon(appOpts, windowsOpts)**
 
-`appOpts`: `{Object}`
+`appOpts`: `{Object}` `{app:, res: ''}`
 
 the app option object has:
 
  * `app` {[app](https://github.com/electron/electron/blob/master/docs/api/app.md) object} _main app object_
  * `res` `{String}` _main app file name_
 
-`windowsOpts`: `{Array<Object>}`
+`windowsOpts`: `{Array<Object>}` `[{bw:, res: ['']}]`
 
 each option object has:
 
