@@ -19,14 +19,14 @@ Please use `npm install --save-dev elemon`.
 
 the app option object has:
 
- * `app` `{[app](https://github.com/electron/electron/blob/master/docs/api/app.md) object}` _main app object_
+ * `app` {[app](https://github.com/electron/electron/blob/master/docs/api/app.md) object} _main app object_
  * `res` `{String}` _main app file name_
 
 `windowsOpts`: `{Array<Object>}`
 
 each option object has:
 
- * `bw` `{[BrowserWindow](https://github.com/electron/electron/blob/master/docs/api/browser-window.md) object}` _a browser window object_
+ * `bw` {[BrowserWindow](https://github.com/electron/electron/blob/master/docs/api/browser-window.md) object} _a browser window object_
  * `res` `{Array<String>}` _array of any file name that is somehow associated with this browser window_
 
 ####Example
