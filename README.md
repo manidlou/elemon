@@ -28,6 +28,7 @@ each option object has:
 
  * `bw` {[BrowserWindow](https://github.com/electron/electron/blob/master/docs/api/browser-window.md) object} _a browser window object_
  * `res` `{Array<String>}` _array of any file name that is somehow associated with this browser window_
+ * `res` `'*'` _watch all files in dir_
 
 ####Example
 
@@ -93,4 +94,3 @@ app.on('ready', () => {
 ```
 
 That's it. Have fun writing your [Electron](https://github.com/electron/electron) applications.
-
