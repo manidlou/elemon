@@ -1,6 +1,6 @@
 /**
  * elemon.js
- * 
+ *
  * Copyright (c) 2016 Mawni Maghsoudlou
  * Released under the MIT license
  */
@@ -11,29 +11,31 @@
  * automatically reloads it upon any changes.
  */
 
-'use strict';
-const chok = require('chokidar');
-const path = require('path');
+'use strict'
+const chok = require('chokidar')
+const path = require('path')
 
-function elemon(main, wins) {
-  var watch_opts = {
+function elemon (main, wins) {
+  var watchOpts = {
     ignored: [/[\/\\]\./, 'node_modules', '.git'],
     persistent: true
-  };
-  var watcher = chok.watch('.', watch_opts);
+  }
+  var watcher = chok.watch('.', watchOpts)
   watcher.on('change', (f) => {
     if (main.app && main.res && main.res === f) {
-      main.app.relaunch();
-      main.app.exit(0);
+      main.app.relaunch()
+      main.app.exit(0)
     } else {
       if (wins && Array.isArray(wins) && wins.length > 0) {
         wins.forEach((win) => {
           if (win.bw && win.res && Array.isArray(win.res) && win.res.indexOf(path.basename(f)) !== -1) {
-            win.bw.reload();
+            win.bw.reload()
+          } else if (win.bw && win.res && win.res === '*') {
+            win.bw.reload()
           }
-        });
+        })
       }
     }
-  });
+  })
 }
-module.exports = elemon;
+module.exports = elemon
