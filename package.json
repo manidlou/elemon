@@ -9,16 +9,16 @@
     "electron live-reload",
     "electron-monitor"
   ],
-  "author": "Mawni Maghsoudlou",
+  "author": "Mani Maghsoudlou",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mawni/elemon.git"
+    "url": "git+https://github.com/manidlou/elemon.git"
   },
   "bugs": {
-    "url": "https://github.com/mawni/elemon/issues"
+    "url": "https://github.com/manidlou/elemon/issues"
   },
-  "homepage": "https://github.com/mawni/elemon#readme",
+  "homepage": "https://github.com/manidlou/elemon#readme",
   "dependencies": {
     "chokidar": "^1.6.1"
   }

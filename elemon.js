@@ -1,7 +1,7 @@
 /**
  * elemon.js
  * 
- * Copyright (c) 2016 Mawni Maghsoudlou
+ * Copyright (c) 2016-2017 Mani Maghsoudlou
  * Released under the MIT license
  */
 
@@ -36,4 +36,5 @@ function elemon(main, wins) {
     }
   });
 }
+
 module.exports = elemon;
