@@ -1,16 +1,3 @@
-/**
- * elemon.js
- * 
- * Copyright (c) 2016-2017 Mani Maghsoudlou
- * Released under the MIT license
- */
-
-/**
- * elemon is a live-reload tool for developing electron application.
- * It monitors an electron application during development and
- * automatically reloads it upon any changes.
- */
-
 'use strict';
 const chok = require('chokidar');
 const path = require('path');
