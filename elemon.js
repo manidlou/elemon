@@ -1,23 +1,10 @@
-/**
- * elemon.js
- *
- * Copyright (c) 2016 Mawni Maghsoudlou
- * Released under the MIT license
- */
-
-/**
- * elemon is a live-reload tool for developing electron application.
- * It monitors an electron application during development and
- * automatically reloads it upon any changes.
- */
-
 'use strict'
 const chok = require('chokidar')
 const path = require('path')
 
 function elemon (main, wins) {
   var watchOpts = {
-    ignored: [/[\/\\]\./, 'node_modules', '.git'],
+    ignored: [/(^|[\/\\])\../, 'node_modules', '.git'], // eslint-disable-line no-useless-escape
     persistent: true
   }
   var watcher = chok.watch('.', watchOpts)
@@ -28,7 +15,7 @@ function elemon (main, wins) {
     } else {
       if (wins && Array.isArray(wins) && wins.length > 0) {
         wins.forEach((win) => {
-          if (win.bw && win.res && Array.isArray(win.res) && (win.res.indexOf(path.basename(f)) !== -1) || win.res.length === 0) {
+          if (win.bw && win.res && Array.isArray(win.res) && (win.res.indexOf(path.basename(f)) !== -1 || win.res.length === 0)) {
             win.bw.reload()
           }
         })
@@ -36,4 +23,5 @@ function elemon (main, wins) {
     }
   })
 }
+
 module.exports = elemon
