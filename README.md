@@ -9,7 +9,7 @@ In fact, setting up a clean live-reload tool for developing an elenctron applica
 
 ####Install
 
-Please use `npm install --save-dev elemon`.
+Please use `npm i elemon --save-dev`.
 
 ####Usage
 
@@ -17,17 +17,18 @@ Please use `npm install --save-dev elemon`.
 
 `appOpts`: `{Object}` `{app:, res: ''}`
 
-the app option object has:
+the `appOpts` object has:
 
- * `app` {[app](https://github.com/electron/electron/blob/master/docs/api/app.md) object} _main app object_
- * `res` `{String}` _main app file name_
+ * `app` {[app](https://github.com/electron/electron/blob/master/docs/api/app.md) object} main app object
+ * `res` `{String}` main app file name
 
-`windowsOpts`: `{Array<Object>}` `[{bw:, res: ['']}]`
+`windowsOpts`: `{Array<Object>}` `[{bw:, res: []}]`
 
-each option object has:
+each object has:
 
- * `bw` {[BrowserWindow](https://github.com/electron/electron/blob/master/docs/api/browser-window.md) object} _a browser window object_
- * `res` `{Array<String>}` _array of any file name that is somehow associated with this browser window_
+ * `bw` {[BrowserWindow](https://github.com/electron/electron/blob/master/docs/api/browser-window.md) object} browser window object
+ * `res` `{Array<String>}` array of any file name that is somehow associated with this browser window
+   - _if you want to watch all files in dir, or if you want the `bw` to be reloaded on any changes and not necessarily changes on specific file(s), leave the `res` as empty `[]`._
 
 ####Example
 
@@ -52,44 +53,43 @@ then, in the main process file where usually app and browser windows are created
 
 *app.js*
 
-```javascript
+```js
 
-const electron = require('electron');
-const {app, BrowserWindow} = electron;
-const elemon = require('elemon');
+const electron = require('electron')
+const {app, BrowserWindow} = electron
+const elemon = require('elemon')
 
-const reg_index = `file://${__dirname}/view/reg.html`;
-const login_index = `file://${__dirname}/view/login.html`;
-var reg_win = null;
-var login_win = null;
+const reg_index = `file://${__dirname}/view/reg.html`
+const login_index = `file://${__dirname}/view/login.html`
+var reg_win = null
+var login_win = null
 
 function create_wins() {
 
   reg_win = new BrowserWindow({
     width: 600,
     height: 400,
-    ...
-  });
+    ... // other stuff
+  })
 
   login_win = new BrowserWindow({
     width: 600,
     height: 400,
     ...
-  });
+  })
 }
 
 // ... and other usual stuff ... //
 
 app.on('ready', () => {
-  create_wins();
+  create_wins()
 
   // this is all that you have to add to your main app script
-  var app_opts = {app: app, res: 'app.js'};
+  var app_opts = {app: app, res: 'app.js'}
   var win_opts = [{bw: reg_win, res: ['reg.html', 'reg_handler.js', 'style.css']}
-                , {bw: login_win, res: ['login.html', 'login_handler.js', 'style.css']}];
-  elemon(app_opts, win_opts);
-});
-
+                , {bw: login_win, res: ['login.html', 'login_handler.js', 'style.css']}]
+  elemon(app_opts, win_opts)
+})
 ```
 
 That's it. Have fun writing your [Electron](https://github.com/electron/electron) applications.

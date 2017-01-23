@@ -1,7 +1,7 @@
 {
   "name": "elemon",
   "version": "4.0.5",
-  "description": "live-reload tool for developing electron application",
+  "description": "live-reload electron application during development",
   "main": "elemon.js",
   "keywords": [
     "electron",
@@ -21,5 +21,8 @@
   "homepage": "https://github.com/manidlou/elemon#readme",
   "dependencies": {
     "chokidar": "^1.6.1"
+  },
+  "scripts": {
+    "lint": "standard"
   }
 }
