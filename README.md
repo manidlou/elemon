@@ -27,8 +27,7 @@ the app option object has:
 each option object has:
 
  * `bw` {[BrowserWindow](https://github.com/electron/electron/blob/master/docs/api/browser-window.md) object} _a browser window object_
- * `res` `{Array<String>}` _array of any file name that is somehow associated with this browser window_
-  * alternatively `res` `'*'` _to watch all files in dir_
+ * `res` `{Array<String>}` _array of any file name that is somehow associated with this browser window. Leave empty to watch all files in dir _
 
 ####Example
 

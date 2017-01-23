@@ -28,9 +28,7 @@ function elemon (main, wins) {
     } else {
       if (wins && Array.isArray(wins) && wins.length > 0) {
         wins.forEach((win) => {
-          if (win.bw && win.res && Array.isArray(win.res) && win.res.indexOf(path.basename(f)) !== -1) {
-            win.bw.reload()
-          } else if (win.bw && win.res && win.res === '*') {
+          if (win.bw && win.res && Array.isArray(win.res) && (win.res.indexOf(path.basename(f)) !== -1) || win.res.length === 0) {
             win.bw.reload()
           }
         })
