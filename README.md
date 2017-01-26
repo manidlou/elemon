@@ -1,6 +1,6 @@
 #elemon
 
-[![npm](https://img.shields.io/npm/v/elemon.svg?maxAge=2592000?style=flat-square)](https://www.npmjs.com/package/elemon)
+[![npm](https://img.shields.io/npm/v/elemon.svg?style=flat-square)](https://www.npmjs.com/package/elemon)
 
 <a href="https://github.com/feross/standard"><img src="https://cdn.rawgit.com/feross/standard/master/sticker.svg" alt="Standard JavaScript" width="100"></a>
 
