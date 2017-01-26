@@ -20,9 +20,9 @@ Usage
 
 **elemon(refs)**
 
-`refs`: `{Object}` object that takes references to app and browser windows objects and resources
+`refs` `{Object}` object that takes references to app and browser windows objects and resources
   - `app` `{Object}` main [app](https://github.com/electron/electron/blob/master/docs/api/app.md) object
-  - `mainFile`: `{String}` main file name
+  - `mainFile` `{String}` main file name
   - `bws` `{Array<Object>}` array of browser window objects and their resources `[{bw:, res: []}]`
     - `bw` `{Object}` [BrowserWindow](https://github.com/electron/electron/blob/master/docs/api/browser-window.md) object
     - `res` `{Array<String>}` array of any file name that is somehow associated with this browser window
