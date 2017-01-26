@@ -21,7 +21,7 @@ Please use `npm i elemon --save-dev`.
   - `bws` `{Array<Object>}` array of browser window objects and their resources `[{bw:, res: []}]`
     - `bw` `{Object}` [BrowserWindow](https://github.com/electron/electron/blob/master/docs/api/browser-window.md) object
     - `res` `{Array<String>}` array of any file name that is somehow associated with this browser window
-      - _if you want to watch all files in dir, or if you want the `bw` to be reloaded on any changes and not necessarily changes on specific file(s), leave the `res` as empty `[]`._
+      - _if you want to watch all files in dir, or if you want the `bw` to be reloaded on any changes and not necessarily changes on specific file(s), leave the `res` as empty `[]`. (thanks [jaime-ez](https://github.com/jaime-ez) for adding this option)._
 
 ####Example
 
