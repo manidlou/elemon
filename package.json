@@ -1,6 +1,6 @@
 {
   "name": "elemon",
-  "version": "5.0.0",
+  "version": "5.0.1",
   "description": "live-reload electron application during development",
   "main": "elemon.js",
   "keywords": [
