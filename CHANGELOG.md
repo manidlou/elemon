@@ -1,9 +1,4 @@
-5.0.1 / 2017-01-26
-------------------
-- updated README and published again since npm failed to pull the latest README file.
-
-
-5.0.0 / 2017-01-26
+5.0.2 / 2017-01-26
 ------------------
 
 ### Added
