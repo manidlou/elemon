@@ -13,82 +13,85 @@ Please use `npm i elemon --save-dev`.
 
 ####Usage
 
-**elemon(appOpts, windowsOpts)**
+**elemon(refs)**
 
-`appOpts`: `{Object}` `{app:, res: ''}`
-
-the `appOpts` object has:
-
- * `app` {[app](https://github.com/electron/electron/blob/master/docs/api/app.md) object} main app object
- * `res` `{String}` main app file name
-
-`windowsOpts`: `{Array<Object>}` `[{bw:, res: []}]`
-
-each object has:
-
- * `bw` {[BrowserWindow](https://github.com/electron/electron/blob/master/docs/api/browser-window.md) object} browser window object
- * `res` `{Array<String>}` array of any file name that is somehow associated with this browser window
-   - _if you want to watch all files in dir, or if you want the `bw` to be reloaded on any changes and not necessarily changes on specific file(s), leave the `res` as empty `[]`._
+`refs`: `{Object}` object that takes references to app and browser windows objects and resources
+  - `app` `{Object}` main [app](https://github.com/electron/electron/blob/master/docs/api/app.md) object
+  - `mainFile`: `{String}` main file name
+  - `bws` `{Array<Object>}` array of browser window objects and their resources `[{bw:, res: []}]`
+    - `bw` `{Object}` [BrowserWindow](https://github.com/electron/electron/blob/master/docs/api/browser-window.md) object
+    - `res` `{Array<String>}` array of any file name that is somehow associated with this browser window
+    - _if you want to watch all files in dir, or if you want the `bw` to be reloaded on any changes and not necessarily changes on specific file(s), leave the `res` as empty `[]`._
 
 ####Example
 
-Suppose it is ,a very simplified, app file structure:
+Suppose it is the app file structure:
 
 ```
 example_proj
   |
-  |__view
-  |     |__reg.html
-  |     |__login.html
-  |     |__reg_handler.js
-  |     |__login_handler.js
+  |__views
+  |    |__win1-index.html
+  |    |__win2-index.html
+  |    |__win1.js
+  |    |__win2.js
   |
   |__stylesheets
-  |     |__style.css
+  |    |__style.css
   |
-  |__app.js
+  |__main.js
 
 ```
 then, in the main process file where usually app and browser windows are created:
 
-*app.js*
+*main.js*
 
 ```js
 
-const electron = require('electron')
-const {app, BrowserWindow} = electron
+const {app, BrowserWindow} = require('electron')
+const path = require('path')
+const url = require('url')
 const elemon = require('elemon')
 
-const reg_index = `file://${__dirname}/view/reg.html`
-const login_index = `file://${__dirname}/view/login.html`
-var reg_win = null
-var login_win = null
+var win1, win2
 
-function create_wins() {
-
-  reg_win = new BrowserWindow({
-    width: 600,
-    height: 400,
-    ... // other stuff
+function createWindows () {
+  win1 = new BrowserWindow({width: 800, height: 600})
+  win1.loadURL(url.format({
+    pathname: path.join(__dirname, 'views', 'win1-index.html'),
+    protocol: 'file:',
+    slashes: true
+  }))
+  win1.on('closed', () => {
+    win1 = null
   })
-
-  login_win = new BrowserWindow({
-    width: 600,
-    height: 400,
-    ...
+  win2 = new BrowserWindow({width: 800, height: 600})
+  win2.loadURL(url.format({
+    pathname: path.join(__dirname, 'views', 'win2-index.html'),
+    protocol: 'file:',
+    slashes: true
+  }))
+  win2.on('closed', () => {
+    win2 = null
   })
 }
 
 // ... and other usual stuff ... //
 
 app.on('ready', () => {
-  create_wins()
+  createWindows()
 
-  // this is all that you have to add to your main app script
-  var app_opts = {app: app, res: 'app.js'}
-  var win_opts = [{bw: reg_win, res: ['reg.html', 'reg_handler.js', 'style.css']}
-                , {bw: login_win, res: ['login.html', 'login_handler.js', 'style.css']}]
-  elemon(app_opts, win_opts)
+  // this is all that you have to add to your main app script.
+  // run your app normally with electron, then it will be reloaded
+  // based on how you define references here
+  elemon({
+    app: app,
+    mainFile: 'main.js',
+    bws: [
+      {bw: win1, res: ['win1-index.html', 'win1.js', 'style.css']},
+      {bw: win2, res: ['win2-index.html', 'win2.js', 'style.css']}
+    ]
+  })
 })
 ```
 
