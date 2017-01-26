@@ -96,3 +96,4 @@ app.on('ready', () => {
 ```
 
 That's it. Have fun writing your [Electron](https://github.com/electron/electron) applications.
+
