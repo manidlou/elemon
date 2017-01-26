@@ -1,10 +1,15 @@
+5.0.1 / 2017-01-26
+------------------
+- updated README and published again since npm failed to pull the latest README file.
+
+
 5.0.0 / 2017-01-26
 ------------------
 
-###Added
+### Added
 - added option to reload browser window on any changes regardless of the file. Thanks [jaime-ez]!
 
-###Changed
+### Changed
 - elemon function now takes only one parameter as options object that contains main app and browser windows references.
 
 4.0.0 / 2016-10-29
