@@ -1,4 +1,5 @@
-#elemon
+elemon
+------
 
 [![npm](https://img.shields.io/npm/v/elemon.svg?style=flat-square)](https://www.npmjs.com/package/elemon)
 
@@ -9,11 +10,13 @@ file is the main app file, then it `relaunch` the app and `exit` the current ins
 
 In fact, setting up a clean live-reload tool for developing an elenctron application is super simple by using the [Electron API](https://github.com/electron/electron/tree/master/docs). The api already comes with whatever you need; just add a watcher (like [chokidar](https://github.com/paulmillr/chokidar) or whatever watcher you like) and you are all set.
 
-####Install
+Install
+-------
 
-Please use `npm i elemon --save-dev`.
+  `npm i elemon --save-dev`.
 
-####Usage
+Usage
+-----
 
 **elemon(refs)**
 
@@ -25,7 +28,8 @@ Please use `npm i elemon --save-dev`.
     - `res` `{Array<String>}` array of any file name that is somehow associated with this browser window
       - _if you want to watch all files in dir, or if you want the `bw` to be reloaded on any changes and not necessarily changes on specific file(s), leave the `res` as empty `[]`. (thanks [jaime-ez](https://github.com/jaime-ez) for adding this option)_
 
-####Example
+Example
+-------
 
 Suppose it is the app file structure:
 
