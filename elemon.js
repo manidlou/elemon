@@ -1,21 +1,22 @@
 'use strict'
-const chok = require('chokidar')
-const path = require('path')
 
-function elemon (dat) {
-  var watchOpts = {
+const path = require('path')
+const chok = require('chokidar')
+
+function elemon (ref) {
+  const watchOpts = {
     ignored: [/(^|[/\\])\../, 'node_modules', '.git'],
     persistent: true
   }
-  var watcher = chok.watch('.', watchOpts)
-  watcher.on('change', (f) => {
-    if (dat.app && dat.mainFile && dat.mainFile === f) {
-      dat.app.relaunch()
-      dat.app.exit(0)
+  const watcher = chok.watch('.', watchOpts)
+  watcher.on('change', f => {
+    if (ref.app && ref.mainFile && ref.mainFile === f) {
+      ref.app.relaunch()
+      ref.app.exit(0)
     } else {
-      if (dat.bws && Array.isArray(dat.bws) && dat.bws.length > 0) {
-        dat.bws.forEach((win) => {
-          if (win.bw && win.res && Array.isArray(win.res) && (win.res.indexOf(path.basename(f)) !== -1 || win.res.length === 0)) {
+      if (ref.bws && ref.bws.length > 0) {
+        ref.bws.forEach(win => {
+          if (win.bw && win.res && (win.res.indexOf(path.basename(f)) > -1 || win.res.length === 0)) {
             win.bw.reload()
           }
         })
