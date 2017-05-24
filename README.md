@@ -102,6 +102,9 @@ app.on('ready', () => {
 })
 ```
 If you want to make sure that you don't get undefined error when you build your app, you can use `elemon` along with [electron-is-dev](https://github.com/sindresorhus/electron-is-dev) like this:
+
+`npm i electron-is-dev --save`
+
 ```js
 const {app, BrowserWindow} = require('electron')
 const isDev = require('electron-is-dev')
