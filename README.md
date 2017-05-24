@@ -37,8 +37,8 @@ Suppose it is the app file structure:
 example_proj
   |
   |__views
-  |    |__win1-index.html
-  |    |__win2-index.html
+  |    |__win1.html
+  |    |__win2.html
   |    |__win1.js
   |    |__win2.js
   |
@@ -59,21 +59,22 @@ const path = require('path')
 const url = require('url')
 const elemon = require('elemon')
 
-var win1, win2
+let win1, win2
 
 function createWindows () {
   win1 = new BrowserWindow({width: 800, height: 600})
   win1.loadURL(url.format({
-    pathname: path.join(__dirname, 'views', 'win1-index.html'),
+    pathname: path.join(__dirname, 'views', 'win1.html'),
     protocol: 'file:',
     slashes: true
   }))
   win1.on('closed', () => {
     win1 = null
   })
+
   win2 = new BrowserWindow({width: 800, height: 600})
   win2.loadURL(url.format({
-    pathname: path.join(__dirname, 'views', 'win2-index.html'),
+    pathname: path.join(__dirname, 'views', 'win2.html'),
     protocol: 'file:',
     slashes: true
   }))
@@ -94,10 +95,35 @@ app.on('ready', () => {
     app: app,
     mainFile: 'main.js',
     bws: [
-      {bw: win1, res: ['win1-index.html', 'win1.js', 'style.css']},
-      {bw: win2, res: ['win2-index.html', 'win2.js', 'style.css']}
+      {bw: win1, res: ['win1.html', 'win1.js', 'style.css']},
+      {bw: win2, res: ['win2.html', 'win2.js', 'style.css']}
     ]
   })
+})
+```
+If you want to make sure that you don't get undefined error when you build your app, you can use `elemon` along with [electron-is-dev](https://github.com/sindresorhus/electron-is-dev) like this:
+```js
+const {app, BrowserWindow} = require('electron')
+const isDev = require('electron-is-dev')
+
+function createWindows () {
+  // ...
+}
+
+app.on('ready', () => {
+  createWindows()
+
+  if (isDev) {
+    const elemon = require('elemon') // require elemon if electron is in dev
+    elemon({
+      app: app,
+      mainFile: 'main.js',
+      bws: [
+        {bw: win1, res: ['win1.html', 'win1.js', 'style.css']},
+        {bw: win2, res: ['win2.html', 'win2.js', 'style.css']}
+      ]
+    })
+  }
 })
 ```
 
